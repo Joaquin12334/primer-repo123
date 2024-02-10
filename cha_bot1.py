@@ -38,11 +38,44 @@ async def pasw(ctx, *, message: str):
     await ctx.send("Tu nueva clave es: " + gen_pass(length))
 
 
+@bot.command()
+async def ayuda(ctx):
+    """Give all comands details and examples"""
+    await ctx.send("""***Los comandos del bot son:*
+**
+*?pasw [mùmero] *= Te da una conttraseña aleatoria con la cantidad de variables que pongas despues del comando
+
+*?coin *= Jira una moneda aleatoreamente te da el resultado (cara o sello)
+
+*?add* [nùmero a - nùmero b] = Suma dos numeros que pongas despues del comando
+
+*?rest* [nùmero a - nùmero b] = Resta dos numeros que pongas despues del comando
+
+*?mult *[nùmero a - nùmero b] = Multiplica dos numeros que pongas despues del comando
+
+*?roll* [NdN] = Lanza un dado en el formato "NdN" y muestra el resultado. Por ejemplo, ?roll 2d6 lanzará dos dados de seis caras.
+
+*?choose* = [(opcion1) (opcion2) ...] = Elige aleatoriamente una de las opciones proporcionadas por el usuario y la muestra.
+
+*?repeat *.= [(num de veces) (contenido a repetir)] = Repite un mensaje una cantidad de veces especificada por el usuario. El contenido del mensaje es opcional y, por defecto, es "repeating...".
+
+*?joined* = [Miembro del servidor] = Muestra la fecha en la que se unio el miembro al servidor
+
+*?cool* =  Comando base para verificar si un usuario es "cool". Si no se especifica un subcomando, responde que el usuario no es "cool".
+
+*?cool bot* =  Verifica si el bot es "cool" y responde afirmativamente.""")
+
 
 @bot.command()
 async def coin(ctx):
     """Flip a coin."""
     await ctx.send("¡La moneda cayò!, el lado que salio es: "+flip_coin(coin_sides))
+
+
+@bot.command()
+async def hola(ctx):
+    """Say hi."""
+    await ctx.send("Mucho gusto ^^, para ver lo que puedo hacer a detalle escribe ?ayuda")
 
 
 @bot.command()
@@ -110,4 +143,4 @@ async def _bot(ctx):
     """Is the bot cool?"""
     await ctx.send('Yes, the bot is cool.')
 
-bot.run("TOKEN")
+bot.run("MTIwMTU3MjczMDI4NjM3NDkxMg.GlpX4x.6Br3m1kmcCM4jYtMLa2R2YQDSxzqge5OhXv5LA")
