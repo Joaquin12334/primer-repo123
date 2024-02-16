@@ -3,6 +3,8 @@ from discord.ext import commands
 import random
 from bot_2 import gen_pass
 from bot_3 import flip_coin, coin_sides
+import os, random
+import requests
 
 description = '''An example bot to showcase the discord.ext.commands extension
 module.
@@ -143,4 +145,82 @@ async def _bot(ctx):
     """Is the bot cool?"""
     await ctx.send('Yes, the bot is cool.')
 
-bot.run("MTIwMTU3MjczMDI4NjM3NDkxMg.GlpX4x.6Br3m1kmcCM4jYtMLa2R2YQDSxzqge5OhXv5LA")
+
+@bot.command()
+async def mem(ctx):
+    imagenes_1 = random.choice(os.listdir("imagenes_1"))
+    with open(f'imagenes_1/{imagenes_1}', 'rb') as f:
+        # ¡Vamos a almacenar el archivo de la biblioteca Discord convertido en esta variable!
+        picture = discord.File(f)
+    # A continuación, podemos enviar este archivo como parámetro.
+    await ctx.send(file=picture)
+
+@bot.command('meme')
+async def meme(ctx, message: str):
+    sec = (message)
+    no = ("Por el momento no tenemos esa categoria")
+    if sec == "animales":
+        animales = random.choice(os.listdir("animales"))
+        with open(f'animales/{animales}', 'rb') as f:
+            picture = discord.File(f)
+        
+    elif sec == "peliculas":
+        peliculas = random.choice(os.listdir("peliculas"))
+        with open(f'peliculas/{peliculas}', 'rb') as f:
+            picture = discord.File(f)
+
+    elif sec == "programacion":
+        programacion = random.choice(os.listdir("programacion"))
+        with open(f'programacion/{programacion}', 'rb') as f:
+            picture = discord.File(f)
+
+    elif sec == "" or sec == "random":
+        memes = random.choice(os.listdir("memes"))
+        with open(f'memes/{memes}', 'rb') as f:
+            picture = discord.File(f)
+
+    elif sec == "videojuegos":
+        videojuegos = random.choice(os.listdir("videojuegos"))
+        with open(f'videojuegos/{videojuegos}', 'rb') as f:
+            picture = discord.File(f)
+
+    elif sec == "series":
+        series = random.choice(os.listdir("series"))
+        with open(f'series/{series}', 'rb') as f:
+            picture = discord.File(f)
+
+    else:
+        picture = no
+
+    await ctx.send(file=picture)
+
+def get_dog_image_url():    
+    url = 'https://random.dog/woof.json'
+    res = requests.get(url)
+    data = res.json()
+    return data['url']
+
+
+def get_duck_image_url():    
+    url = 'https://random-d.uk/api/random'
+    res = requests.get(url)
+    data = res.json()
+    return data['url']
+
+
+@bot.command('animal')
+async def animal(ctx, message: str):
+    ani = (message)
+    if ani == "duck":
+        image_url = get_duck_image_url()
+
+    elif ani == "dog":
+        image_url = get_dog_image_url()
+
+    else:
+        image_url = "Por lo pronto no tenemos ese animal en el catalogo"
+
+    await ctx.send(image_url)
+
+
+bot.run("TOKEN")
